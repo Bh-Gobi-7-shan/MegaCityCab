@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.Connection;
 import java.util.Random;
 
 @WebServlet("/signup")
@@ -38,19 +37,21 @@ public class SignUp extends HttpServlet {
 
 
         String otp = generateOtp();
-        boolean status = sendSms.sendSMS(phoneNumber, "The OTP code For the Signup is : " + otp);
-        //boolean status = true; // need to romove once the above relased
+        //boolean status = sendSms.sendSMS(phoneNumber, "The OTP code For the Signup is : " + otp);
+        boolean status = true; // need to romove once the above relased
 
         if (status){
-            req.setAttribute("firstName", firstName);
-            req.setAttribute("lastName", lastName);
-            req.setAttribute("nicNumber", nicNumber);
-            req.setAttribute("phoneNumber", phoneNumber);
-            req.setAttribute("gender", gender);
-            req.setAttribute("password", password);
-            req.setAttribute("otp", otp);
+            req.getSession().setAttribute("firstName", firstName);
+            req.getSession().setAttribute("lastName", lastName);
+            req.getSession().setAttribute("nicNumber", nicNumber);
+            req.getSession().setAttribute("phoneNumber", phoneNumber);
+            req.getSession().setAttribute("gender", gender);
+            req.getSession().setAttribute("password", password);
+            req.getSession().setAttribute("otp", otp);
+
 
             RequestDispatcher dispatcher1 = req.getRequestDispatcher("/WEB-INF/views/verification.jsp");
+            System.out.println("OTP is :" + otp); // need to remove
             dispatcher1.forward(req, resp);
         }
         else {

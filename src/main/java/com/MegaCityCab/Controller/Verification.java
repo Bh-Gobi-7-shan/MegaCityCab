@@ -16,36 +16,35 @@ import java.sql.Statement;
 
 @WebServlet("/verification")
 public class Verification extends HttpServlet {
-    private SmsSender sendSms;
     private Connection connection;
 
     @Override
     public void init() throws ServletException {
-        sendSms = new SmsSender();
         connection = DataBase.getConnection();
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String firstName = (String) req.getAttribute("firstName");
-        String lastName = (String) req.getAttribute("lastName");
-        String nicNumber = (String) req.getAttribute("nicNumber");
-        String phoneNumber = (String) req.getAttribute("phoneNumber");
-        String gender = (String) req.getAttribute("gender");
-        String password = (String) req.getAttribute("password");
-        String otp = (String) req.getAttribute("otp");
-
+        String firstName = (String) req.getSession().getAttribute("firstName");
+        String lastName = (String) req.getSession().getAttribute("lastName");
+        String nicNumber = (String) req.getSession().getAttribute("nicNumber");
+        String phoneNumber = (String) req.getSession().getAttribute("phoneNumber");
+        String gender = (String) req.getSession().getAttribute("gender");
+        String password = (String) req.getSession().getAttribute("password");
+        String otp = (String) req.getSession().getAttribute("otp");
 
         String getOtp = req.getParameter("otp");
+
         if (getOtp != null && getOtp.equals(otp)){
             // db store related works
-
-
-
-
-
-
-            RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/home.jsp");
+            System.err.println("matched");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/home");
+            dispatcher.forward(req, resp);
+        }
+        else {
+            System.err.println("OTP mismatch. Redirecting back to verification.");
+            req.setAttribute("error", "Invalid OTP. Please try again.");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/verification.jsp");
             dispatcher.forward(req, resp);
         }
     }
