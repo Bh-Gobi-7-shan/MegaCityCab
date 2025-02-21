@@ -65,8 +65,8 @@ public class DatabaseModel {
             Statement stmt = conn.createStatement();
 
             stmt.executeUpdate(createQuestionDetailsTable);
-            //stmt.executeUpdate(createUserTable);
-            //stmt.executeUpdate(createUserDetailsTable);
+            stmt.executeUpdate(createUserTable);
+            stmt.executeUpdate(createUserDetailsTable);
             //stmt.executeUpdate(createDriverTable);
 
             System.out.println("Tables created successfully.");

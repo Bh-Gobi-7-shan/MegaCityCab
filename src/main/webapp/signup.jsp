@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Signup | MegaCityCab</title>
     <link rel="stylesheet" href="assets/css/signup.css">
+    <link rel="stylesheet" href="assets/css/toast.css">
 </head>
 <body>
     <div class="signup-container">
@@ -70,10 +71,27 @@
             <button type="submit">Sign Up</button>
         </form>
         <div class="login-link">
-            Already have an account? <a href="login.html">Login</a>
+            Already have an account? <a href="login.jsp">Login</a>
         </div>
     </div>
 
+    <!-- Toast message -->
+        <div class="toast-container" id="toastContainer"></div>
+    <!-- End Toast message -->
+
     <script src="assets/js/signup.js"></script>
+    <script src="assets/js/toast.js"></script>
+
+     <!-- Error Toast message handled by jsp -->
+    <%
+        String error = (String) request.getAttribute("error");
+        if (error != null) {
+    %>
+            <script>
+                showToast("<%= error %>", "error");
+            </script>
+
+        <% }
+    %>
 </body>
 </html>

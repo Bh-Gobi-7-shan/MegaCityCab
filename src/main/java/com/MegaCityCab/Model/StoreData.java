@@ -29,15 +29,14 @@ public class StoreData {
         }
     }
 
-    public static boolean storeUser(String nic, String password, String adminRole) {
-        String sql = "INSERT INTO Users (nic_number, password, role_admin) VALUES (?, ?, ?)";
+    public static boolean storeUser(String nic, String password) {
+        String sql = "INSERT INTO Users (nic_number, password) VALUES (?, ?)";
         try {
             conn = DataBase.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
 
             statement.setString(1, nic);
             statement.setString(2, password);
-            statement.setString(3, adminRole.toUpperCase());
 
             int successful = statement.executeUpdate();
             return successful > 0;

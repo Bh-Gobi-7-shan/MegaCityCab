@@ -23,6 +23,7 @@ public class SignUp extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         String firstName = req.getParameter("firstName").trim().toUpperCase();
         String lastName = req.getParameter("lastName").trim().toUpperCase();
         String nicNumber = req.getParameter("nicNumber").trim();
@@ -44,15 +45,13 @@ public class SignUp extends HttpServlet {
             req.getSession().setAttribute("password", password);
             req.getSession().setAttribute("otp", otp);
 
-
-            RequestDispatcher dispatcher1 = req.getRequestDispatcher("/WEB-INF/views/verification.jsp");
+            resp.sendRedirect("verification.jsp");
             System.out.println("OTP is :" + otp); // need to remove
-            dispatcher1.forward(req, resp);
         }
         else {
-            req.setAttribute("error", "Failed to send OTP. Please try again.");
-            RequestDispatcher dispatcher2 = req.getRequestDispatcher("/WEB-INF/views/signup.jsp");
-            dispatcher2.forward(req, resp);
+            req.setAttribute("error", "Failed to do next process. Please try again.");
+            RequestDispatcher dispatcher = req.getRequestDispatcher("signup.jsp");
+            dispatcher.forward(req, resp);
         }
     }
 

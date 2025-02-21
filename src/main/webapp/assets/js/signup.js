@@ -83,8 +83,8 @@ document.getElementById("signupForm").addEventListener("submit", function(event)
         phonenumberError.textContent = "Phone number is required.";
         isValid = false;
     }
-    else if (phonenumber.length !== 10 || !/^\d{10}$/.test(phonenumber)) {
-        phonenumberError.textContent = "Phone number should be exactly 10 digits.";
+    else if (phonenumber.length !== 10 || !/^(07)\d{8}$/.test(phonenumber)) {
+        phonenumberError.textContent = "Phone number should start with '07' and be exactly 10 digits.";
         isValid = false;
     }
 
