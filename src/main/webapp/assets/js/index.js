@@ -58,6 +58,9 @@ document.getElementById("contactForm").addEventListener("submit", function(event
         messageError.textContent = "Message must be at least 10 characters long.";
         isValid = false;
     }
+     if (!isValid) {
+        event.preventDefault();
+     }
 
     // Send data and receive response
     if (isValid) {
@@ -69,8 +72,7 @@ document.getElementById("contactForm").addEventListener("submit", function(event
             message: message
         };
 
-
-        fetch('/query', {
+        fetch('/MegaCityCab/index', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

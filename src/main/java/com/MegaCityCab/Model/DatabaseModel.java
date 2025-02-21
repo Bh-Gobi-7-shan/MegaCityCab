@@ -11,6 +11,15 @@ public class DatabaseModel {
     static Connection conn = null;
 
     public static void createTable() {
+        String createQuestionDetailsTable = "CREATE TABLE IF NOT EXISTS questions ("
+                + "email VARCHAR(100) NOT NULL, "
+                + "name VARCHAR(100) NOT NULL, "
+                + "subject VARCHAR(255) NOT NULL, "
+                + "message TEXT NOT NULL, "
+                + "posted_at DATETIME DEFAULT CURRENT_TIMESTAMP, "
+                + "PRIMARY KEY (email, name)"
+                + ");";
+
         String createUserTable = "CREATE TABLE IF NOT EXISTS users ("
                 + "nic_number VARCHAR(12) UNIQUE NOT NULL PRIMARY KEY, "
                 + "password VARCHAR(20) NOT NULL, "
@@ -55,9 +64,10 @@ public class DatabaseModel {
             conn = DataBase.getConnection();
             Statement stmt = conn.createStatement();
 
-            stmt.executeUpdate(createUserTable);
-            stmt.executeUpdate(createUserDetailsTable);
-            stmt.executeUpdate(createDriverTable);
+            stmt.executeUpdate(createQuestionDetailsTable);
+            //stmt.executeUpdate(createUserTable);
+            //stmt.executeUpdate(createUserDetailsTable);
+            //stmt.executeUpdate(createDriverTable);
 
             System.out.println("Tables created successfully.");
         }

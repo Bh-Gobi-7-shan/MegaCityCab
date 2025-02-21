@@ -55,10 +55,7 @@ public class SignUp extends HttpServlet {
             dispatcher2.forward(req, resp);
         }
     }
-    @Override
-    public void destroy() {
-        DataBase.closeConnection();
-    }
+
 
     public static String generateOtp() {
         Random random = new Random();

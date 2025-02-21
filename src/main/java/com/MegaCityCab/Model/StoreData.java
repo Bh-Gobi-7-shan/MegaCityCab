@@ -8,6 +8,27 @@ import java.sql.PreparedStatement;
 public class StoreData {
     static Connection conn = null;
 
+    public static boolean storeQuestionDetails(String name, String email, String subject, String message) {
+        String sql = "INSERT INTO questions (name, email, subject, message) VALUES (?, ?, ?, ?)";
+
+        try {
+            conn = DataBase.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql);
+
+            statement.setString(1, name);
+            statement.setString(2, email);
+            statement.setString(3, subject);
+            statement.setString(4, message);
+
+            int successful = statement.executeUpdate();
+            return successful > 0;
+        }
+        catch (Exception e) {
+            System.err.println("DB Model ERROR in storeUserDetails method: " + e.getMessage());
+            return false;
+        }
+    }
+
     public static boolean storeUser(String nic, String password, String adminRole) {
         String sql = "INSERT INTO Users (nic_number, password, role_admin) VALUES (?, ?, ?)";
         try {
@@ -80,4 +101,7 @@ public class StoreData {
             return false;
         }
     }
+
+
+
 }

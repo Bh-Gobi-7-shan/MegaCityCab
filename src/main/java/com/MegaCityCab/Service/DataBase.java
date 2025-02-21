@@ -17,6 +17,7 @@ public class DataBase {
             if (connection == null || connection.isClosed()){
                 Class.forName("com.mysql.cj.jdbc.Driver");
                 connection = DriverManager.getConnection(URL, USER, PASSWORD);
+                System.out.println("Database connected successfully.");
             }
 
         }

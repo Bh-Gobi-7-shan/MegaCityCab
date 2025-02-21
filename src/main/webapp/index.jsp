@@ -8,6 +8,7 @@
     <title>MegaCityCab</title>
     <link rel="icon" type="image/png" href="icon.png">
     <link rel="stylesheet" href="assets/css/index.css">
+    <link rel="stylesheet" href="assets/css/toast.css">
 
 </head>
 <body>
@@ -159,6 +160,11 @@
         </div>
     </section>
 
+    <!-- Toast message -->
+    <div class="toast-container" id="toastContainer"></div>
+    <!-- End Toast message -->
+
     <script src="assets/js/index.js"></script>
+    <script src="assets/js/toast.js"></script>
 </body>
 </html>
