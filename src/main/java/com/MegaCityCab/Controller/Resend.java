@@ -2,7 +2,6 @@ package com.MegaCityCab.Controller;
 
 
 import com.MegaCityCab.Service.SmsSender;
-import org.json.JSONObject;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-import static com.MegaCityCab.Controller.SignUp.generateOtp;
 
 @WebServlet("/resend")
 public class Resend extends HttpServlet {
@@ -32,7 +30,9 @@ public class Resend extends HttpServlet {
     private void resendOTP(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         String phoneNumber = (String) req.getSession().getAttribute("phoneNumber");
-        String otp = generateOtp();
+        String otp = (String) req.getSession().getAttribute("otp");
+
+        System.out.println("Resend OTP is :" + otp);
 
         //boolean reSendStatus = resendSms.sendSMS(phoneNumber, "The OTP code For the Signup is : " + otp);
         boolean reSendStatus = true; // need to romove once the above relased
@@ -45,7 +45,7 @@ public class Resend extends HttpServlet {
             req.setAttribute("message", "OTP Resend failed. Please try again.");
             req.setAttribute("type", "error");
         }
-        
+
         RequestDispatcher dispatcher = req.getRequestDispatcher("verification.jsp");
         dispatcher.include(req, resp);
     }

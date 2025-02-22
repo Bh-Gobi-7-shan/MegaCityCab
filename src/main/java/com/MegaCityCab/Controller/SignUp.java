@@ -1,6 +1,5 @@
 package com.MegaCityCab.Controller;
 
-import com.MegaCityCab.Service.DataBase;
 import com.MegaCityCab.Service.SmsSender;
 
 import javax.servlet.RequestDispatcher;
@@ -46,7 +45,7 @@ public class SignUp extends HttpServlet {
             req.getSession().setAttribute("otp", otp);
 
             resp.sendRedirect("verification.jsp");
-            System.out.println("OTP is :" + otp); // need to remove
+            System.out.println("OTP is :" + otp);
         }
         else {
             req.setAttribute("error", "Failed to do next process. Please try again.");
@@ -54,7 +53,6 @@ public class SignUp extends HttpServlet {
             dispatcher.forward(req, resp);
         }
     }
-
 
     public static String generateOtp() {
         Random random = new Random();

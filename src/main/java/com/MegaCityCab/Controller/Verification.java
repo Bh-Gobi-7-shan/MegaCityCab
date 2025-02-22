@@ -34,7 +34,6 @@ public class Verification extends HttpServlet {
         }
         else{
             req.setAttribute("error", "Invalid OTP. Please try again.");
-
             RequestDispatcher dispatcher = req.getRequestDispatcher("verification.jsp");
             dispatcher.forward(req, resp);
         }

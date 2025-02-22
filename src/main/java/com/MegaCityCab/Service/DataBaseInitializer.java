@@ -1,6 +1,6 @@
-package com.MegaCityCab.Model;
+package com.MegaCityCab.Service;
 
-import com.MegaCityCab.Service.DataBase;
+import com.MegaCityCab.Model.DatabaseModel;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
